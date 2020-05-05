@@ -22,7 +22,8 @@ class AddUserComponent extends Component{
         let user = {username: this.state.username, password: this.state.password, firstName: this.state.firstName, lastName: this.state.lastName, age: this.state.age, salary: this.state.salary};
         ApiService.addUser(user)
             .then(res => {
-                this.setState({message : 'User added successfully.'});
+                this.setState({message : res.data.message});
+                alert(this.state.message);
                 this.props.history.push('/users');
             });
     }
@@ -66,6 +67,7 @@ class AddUserComponent extends Component{
                 </div>
 
                 <button className="btn btn-success" onClick={this.saveUser}>Save</button>
+                
             </form>
     </div>
         );

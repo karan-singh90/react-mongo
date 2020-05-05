@@ -43,7 +43,8 @@ class EditUserComponent extends Component {
         let user = {id: this.state.id, password: this.state.password, firstName: this.state.firstName, lastName: this.state.lastName, age: this.state.age, salary: this.state.salary};
         ApiService.editUser(user)
             .then(res => {
-                this.setState({message : 'User added successfully.'});
+                this.setState({message : res.data.message});
+                alert(this.state.message);
                 this.props.history.push('/users');
             });
     }

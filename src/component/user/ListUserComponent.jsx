@@ -22,14 +22,15 @@ class ListUserComponent extends Component {
     reloadUserList() {
         ApiService.fetchUsers()
             .then((res) => {
-                this.setState({users: res.data.result})
+                this.setState({users: res.data.result});
+                 this.setState({message: res.data.message});
             });
     }
 
     deleteUser(userId) {
         ApiService.deleteUser(userId)
            .then(res => {
-               this.setState({message : 'User deleted successfully.'});
+               this.setState({message : res.data.message});
                this.setState({users: this.state.users.filter(user => user.id !== userId)});
            })
 
@@ -76,11 +77,11 @@ class ListUserComponent extends Component {
                                             <button className="btn btn-success" onClick={() => this.editUser(user.id)} style={{marginLeft: '20px'}}> Edit</button>
                                         </td>
                                     </tr>
-                            )
+                            )     
                         }
                     </tbody>
                 </table>
-
+                    <p><b>{this.state.message}</b></p>
             </div>
         );
     }
