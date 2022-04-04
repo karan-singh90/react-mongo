@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const USER_API_BASE_URL = 'http://localhost:8081/users';
+const USER_API_BASE_URL = 'http://app-env.eba-funexrxb.ap-south-1.elasticbeanstalk.com/users';
 
 class ApiService {
 
