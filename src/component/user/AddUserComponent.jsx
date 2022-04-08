@@ -22,7 +22,7 @@ class AddUserComponent extends Component{
         let user = {username: this.state.username, password: this.state.password, firstName: this.state.firstName, lastName: this.state.lastName, age: this.state.age, salary: this.state.salary};
         ApiService.addUser(user)
             .then(res => {
-                this.setState({message : res.data.message});
+                this.setState({message : res.data});
                 alert(this.state.message);
                 this.props.history.push('/users');
             });

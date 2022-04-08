@@ -6,7 +6,7 @@ class EditUserComponent extends Component {
     constructor(props){
         super(props);
         this.state ={
-            id: '',
+            _id: '',
             firstName: '',
             lastName: '',
             age: '',
@@ -23,9 +23,9 @@ class EditUserComponent extends Component {
     loadUser() {
         ApiService.fetchUserById(window.localStorage.getItem("userId"))
             .then((res) => {
-                let user = res.data.result;
+                let user = res.data;
                 this.setState({
-                id: user.id,
+                _id: user._id,
                 username: user.username,
                 firstName: user.firstName,
                 lastName: user.lastName,
@@ -40,10 +40,10 @@ class EditUserComponent extends Component {
 
     saveUser = (e) => {
         e.preventDefault();
-        let user = {id: this.state.id, password: this.state.password, firstName: this.state.firstName, lastName: this.state.lastName, age: this.state.age, salary: this.state.salary};
+        let user = {_id: this.state._id,username: this.state.username, password: this.state.password, firstName: this.state.firstName, lastName: this.state.lastName, age: this.state.age, salary: this.state.salary};
         ApiService.editUser(user)
             .then(res => {
-                this.setState({message : res.data.message});
+                this.setState({message : res.data});
                 alert(this.state.message);
                 this.props.history.push('/users');
             });

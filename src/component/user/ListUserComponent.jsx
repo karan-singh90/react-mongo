@@ -22,16 +22,17 @@ class ListUserComponent extends Component {
     reloadUserList() {
         ApiService.fetchUsers()
             .then((res) => {
-                this.setState({users: res.data.result});
+                this.setState({users: res.data});
                  this.setState({message: res.data.message});
             });
     }
 
     deleteUser(userId) {
         ApiService.deleteUser(userId)
+
            .then(res => {
-               this.setState({message : res.data.message});
-               this.setState({users: this.state.users.filter(user => user.id !== userId)});
+               this.setState({message : res.data});
+               this.setState({users: this.state.users.filter(user => user._id !== userId)});
            })
 
     }
@@ -66,15 +67,16 @@ class ListUserComponent extends Component {
                         {
                             this.state.users.map(
                         user =>
-                                    <tr key={user.id}>
+                        
+                                    <tr key={user._id}>
                                         <td>{user.firstName}</td>
                                         <td>{user.lastName}</td>
                                         <td>{user.username}</td>
                                         <td>{user.age}</td>
                                         <td>{user.salary}</td>
                                         <td>
-                                            <button className="btn btn-success" onClick={() => this.deleteUser(user.id)}> Delete</button>
-                                            <button className="btn btn-success" onClick={() => this.editUser(user.id)} style={{marginLeft: '20px'}}> Edit</button>
+                                            <button className="btn btn-success" onClick={() => this.deleteUser(user._id)}> Delete</button>
+                                            <button className="btn btn-success" onClick={() => this.editUser(user._id)} style={{marginLeft: '20px'}}> Edit</button>
                                         </td>
                                     </tr>
                             )     
